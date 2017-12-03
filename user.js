@@ -41,9 +41,16 @@ exports.edit = function(req, res){
 };
 
 exports.delete = function(req, res){
-   i = users.indexOf(req.user.name);
-  users.splice(i, i+2);
-  res.render('users',{ title: 'Users', users: users });
+  var userId = -1;
+  for(var i = 0; i < users.length; i++){
+    if(req.user.name === users[i].name){
+    	userId = i;
+	break;
+    }
+  }
+	
+  users.splice(userId, userId + 1);
+  res.render('users', { title: 'Users', users: users });
 }
    
 exports.update = function(req, res){
