@@ -14,10 +14,7 @@ exports.list = function(req, res){
 
 exports.load = function(req, res, next){
 	// in your request handler
-if(r.url.match(/app\.cache$/)){
-    s.writeHead(200, {'Content-Type': 'text/cache-manifest'});
-    return s.end(cf);
-}
+
   var id = req.params.id;
   req.user = users[id];
   if (req.user) {
@@ -43,12 +40,12 @@ exports.edit = function(req, res){
   });
 };
 
-/*exports.delete = function(req, res){
-  i = users.indexOf(req.user.name);
-  users.splice(i, i+1);
+exports.delete = function(req, res){
+   i = users.indexOf(req.user.name);
+  users.splice(i, i+2);
   res.render('users',{ title: 'Users', users: users });
 }
-   */
+   
 exports.update = function(req, res){
   // Normally you would handle all kinds of
   // validation and save back to the db

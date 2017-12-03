@@ -12,7 +12,7 @@ var site = require('./site');
 var post = require('./post');
 var user = require('./user');
 var c = require('appcache-node');
-var cf = c.newCache();
+var cf = c.newCache(['../style.css']);
 
 
 module.exports = app;
@@ -37,16 +37,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', site.index);
 
 
+global.updateCache = function() {
+  cf = c.newCache(['../style.css']);
+};
+
+
+// in your request handler
 app.all('/app.cache', function(req, res){
     res.writeHead(200, {'Content-Type': 'text/cache-manifest'});
     res.end(cf);
 })
-
-// in your request handler
-if(r.url.match(/app\.cache$/)){
-    s.writeHead(200, {'Content-Type': 'text/cache-manifest'});
-    return s.end(cf);
-}
 // User
 
 app.get('/users', user.list);
