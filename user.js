@@ -49,7 +49,7 @@ exports.delete = function(req, res){
     }
   }
 	
-  users.splice(userId, userId + 1);
+  users.splice(userId, 1);
   res.render('users', { title: 'Users', users: users });
 }
    
